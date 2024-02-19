@@ -6,10 +6,11 @@ use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 use App\Events\CarLeadStatusEvent;
 use App\Events\CustomerStatusEvent;
 use App\Models\CarLead;
-use App\Services\GlobalService;
 use App\Models\CarDriverDetail;
+use App\Services\CarLeadTaskService;
+// use App\Services\GlobalService;
 
-class CarLeadObserver extends GlobalService implements ShouldHandleEventsAfterCommit
+class CarLeadObserver extends CarLeadTaskService implements ShouldHandleEventsAfterCommit
 {
     /**
      * Handle the CarLead "created" event.
@@ -17,6 +18,11 @@ class CarLeadObserver extends GlobalService implements ShouldHandleEventsAfterCo
     public function created(CarLead $carLead): void
     {
         event(new CarLeadStatusEvent($carLead->id, null));
+        
+        $this->addTask([
+            'customer_id' => $carLead->customer_id,
+            'car_lead_id' => $carLead->id
+        ]);
     }
 
     /**

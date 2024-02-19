@@ -21,6 +21,8 @@ use App\Models\CarDriverDetail;
 use App\Observers\CarDriverDetailObserver;
 use App\Models\CarLead;
 use App\Observers\CarLeadObserver;
+use App\Models\CarLeadTask;
+use App\Observers\CarLeadTaskObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,6 @@ class AppServiceProvider extends ServiceProvider
         CustomerDetails::observe(CustomerDetailObserver::class);
         CarDriverDetail::observe(CarDriverDetailObserver::class);
         CarLead::observe(CarLeadObserver::class);
-
+        CarLeadTask::observe(CarLeadTaskObserver::class);
     }
 }

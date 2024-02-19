@@ -151,6 +151,76 @@ trait SystemTrait {
         return [1, 2, 3];
     }
 
+    // Start Task Status
+    public function getLostLeadDisposition()
+    {
+        return 8;
+    }
+    public function getCustomerBoughtDisposition()
+    {
+        return 9;
+    }
+
+    public function getCallbackDisposition()
+    {
+        return 10;
+    }
+
+    public function getCallbackPolicyCancelledDisposition()
+    {
+        return 12;
+    }
+    public function getCallbackIntransactDisposition()
+    {
+        return 13;
+    }
+
+    public function getClosedDispositionDisposition()
+    {
+        return 19;
+    }
+
+    public function getCallbackRefundClosedDisposition()
+    {
+        return 20;
+    }
+    public function getTaskOpenStatusDisposition()
+    {
+        return 1;
+    }
+    public function getTaskCloseStatusDisposition()
+    {
+        return 2;
+    }
+
+    public function getFalseLeadDispositionDisposition()
+    {
+        return 11;
+    }
+
+    public function getPolicyTransferedFromTaskStatusDisposition()
+    {
+        return 14;
+    }
+
+    public function getPolicyTransferedToTaskStatusDisposition()
+    {
+        return 15;
+    }
+    public function getRenewalCallbackTaskStatusDisposition()
+    {
+        return 16;
+    }
+    public function getRedundantLeaDispositiond() {
+        return 17;
+    }
+    /**
+     * jira issue 465
+     */
+    public function getAddNewLeadDisposition() {
+        return 18;
+    }
+
     // insurance type
     public function getCar() {
         return 1;

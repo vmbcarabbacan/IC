@@ -3,9 +3,10 @@
 namespace App\Services;
 use App\Models\CarLead;
 use App\Models\CarDriverDetail;
-use App\Services\GlobalService;
+// use App\Services\GlobalService;
+use App\Services\CarLeadTaskService;
 
-class CarLeadService extends GlobalService {
+class CarLeadService extends CarLeadTaskService {
 
     public function createOrUpLead(array $data) {
         $lead = new CarLead();

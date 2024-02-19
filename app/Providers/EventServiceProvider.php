@@ -12,6 +12,9 @@ use App\Listeners\CustomerLogListener;
 use App\Events\CarLeadStatusEvent;
 use App\Listeners\CarLeadStatusListener;
 
+// use App\Models\CarLeadTask;
+// use App\Observers\CarLeadTaskObserver;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -36,7 +39,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // CarLeadTask::observe(CarLeadTaskObserver::class);
     }
 
     /**
