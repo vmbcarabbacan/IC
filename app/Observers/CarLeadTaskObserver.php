@@ -26,7 +26,7 @@ class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAft
 
         $carLeadTask->saveQuietly();
 
-        $customerDetails->task_due_date = $carLeadTask->due_date;
+        $customerDetails->task_due_date = $this->getOldestDueDate($carLeadTask->customer_id);
         $customerDetails->is_renewal = $this->isRenewal($carLeadTask->customer_id);
         $customerDetails->task_count = $this->getCount($carLeadTask->customer_id);
         $customerDetails->saveQuietly();
@@ -44,7 +44,7 @@ class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAft
 
         $carLeadTask->saveQuietly();
 
-        $customerDetails->task_due_date = $carLeadTask->due_date;
+        $customerDetails->task_due_date = $this->getOldestDueDate($carLeadTask->customer_id);
         $customerDetails->is_renewal = $this->isRenewal($carLeadTask->customer_id);
         $customerDetails->task_count = $this->getCount($carLeadTask->customer_id);
         $customerDetails->saveQuietly();
@@ -81,5 +81,10 @@ class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAft
 
     private function isRenewal($customer_id) {
         return CarLeadTask::where(['customer_id' => $customer_id, 'is_renewal' => 1])->whereNull('closed_at')->exists();
+    }
+
+    private function getOldestDueDate($customer_id) {
+        return CarLeadTask::where(['customer_id' => $customer_id])->whereNull('closed_at')->orderBy('due_date', 'ASC')->first()->due_date;
+
     }
 }

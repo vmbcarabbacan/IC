@@ -23,6 +23,8 @@ use App\Models\CarLead;
 use App\Observers\CarLeadObserver;
 use App\Models\CarLeadTask;
 use App\Observers\CarLeadTaskObserver;
+use App\Models\UserSetting;
+use App\Observers\UserSettingObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        UserSetting::observe(UserSettingObserver::class);
         Customer::observe(CustomerObserver::class);
         CustomerDetails::observe(CustomerDetailObserver::class);
         CarDriverDetail::observe(CarDriverDetailObserver::class);

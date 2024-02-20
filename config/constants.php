@@ -6,6 +6,18 @@ return [
         0 => 'Inactive'
     ],
 
+    'user_roles' => [
+        1 => 'Admin',
+        2 => 'Sales Agent',
+        3 => 'Underwriter',
+        4 => 'Accountant',
+        5 => 'Marketing Agent',
+        6 => 'Sales Manager',
+        7 => 'Marketing Admin',
+        8 => 'Team Leader',
+        9 => 'Quality Compliance Assurance'
+    ],
+
     'customer_log' => [
         1 => 'Created Customer',
         2 => 'Updated Customer Information',
@@ -123,4 +135,16 @@ return [
         1 => 'Online',
         4 => 'Intrasact',
     ],
+
+    'agent_type' => [
+        1 => 'New Leads',
+        2 => 'Renewals',
+        3 => 'Both'
+    ],
+
+    'renewal_deals' => [
+        1 => 'Self Deals',
+        2 => 'All Deals',
+        3 => 'Lost Leads'
+    ]
 ];
