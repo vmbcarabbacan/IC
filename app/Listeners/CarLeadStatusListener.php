@@ -3,12 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\CarLeadStatusEvent;
+use App\Events\CustomerStatusEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Services\CarLeadService;
 
 class CarLeadStatusListener extends CarLeadService
 {
+    private $has_change = false;
     /**
      * Handle the event.
      */
@@ -22,6 +24,9 @@ class CarLeadStatusListener extends CarLeadService
         
         $car_lead->status = $this->getStatus($car_lead, $data);
         $car_lead->save();
+
+        event(new CustomerStatusEvent($car_lead->customer_id, $this->getCar(), ['customer_return' => $this->has_change]));
+        
     } 
 
     private function getStatus($car_lead, $data = null) {
@@ -34,8 +39,13 @@ class CarLeadStatusListener extends CarLeadService
         if($car_lead->driver->brand_id == 0)
             $status = $this->getQuickLead();
 
-        else if(isset($data['has_changed']))
+        else if(isset($data['has_changed'])) {
             $status = $data['has_changed'];
+            
+            if($data['has_changed'] == $this->getPendingLead()) 
+                $this->has_change = true;
+        }
+            
         
         else {
             /**

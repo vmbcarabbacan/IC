@@ -46,7 +46,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function getStatusTextAttribue() {
-        return config('constants.status')[$this->status];
+    public function getStatusTextAttribute() {
+        $status = $this->status;
+        if(!$status) $status = 0;
+        return $status ? config('constants.status')[$status] : 'Inactive';
+    }
+
+    public function userSetting() {
+        return $this->hasOne(UserSetting::class, 'user_id', 'id');
     }
 }

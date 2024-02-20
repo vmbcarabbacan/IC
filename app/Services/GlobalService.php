@@ -3,11 +3,12 @@
 namespace App\Services;
 use Illuminate\Support\Facades\DB;
 use App\Traits\SystemTrait;
+use App\Traits\LoggingTrait;
 use Carbon\Carbon;
 
 class GlobalService {
 
-    use SystemTrait;
+    use SystemTrait, LoggingTrait;
 
     public function getSetting($key) {
         return DB::table('app_configurations')->where('key', $key)->first();

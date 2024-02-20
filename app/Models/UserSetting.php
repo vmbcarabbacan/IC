@@ -19,7 +19,13 @@ class UserSetting extends Model
         'agent_type',
         'renewal_deals',
         'insurance_type',
-        'failed_attemp',
+        'failed_attempt',
         'status',
     ];
+
+    public $timestamps = false;
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

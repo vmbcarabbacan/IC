@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 use App\Events\CarLeadStatusEvent;
-use App\Events\CustomerStatusEvent;
+// use App\Events\CustomerStatusEvent;
 use App\Models\CarDriverDetail;
 use App\Services\GlobalService;
 use App\Models\CarLead;
@@ -25,9 +25,11 @@ class CarDriverDetailObserver extends GlobalService implements ShouldHandleEvent
     public function updated(CarDriverDetail $carDriverDetail): void
     {
         $lead = $this->model(CarLead::class, ['car_driver_detail_id' => $carDriverDetail->id]);
-        if($carDriverDetail->wasChanged())
+        if($carDriverDetail->wasChanged()) {
             event(new CarLeadStatusEvent($lead->id, ['has_changed' => $this->getPendingLead()]));
-            event(new CustomerStatusEvent($lead->customer_id, $this->getCar(), ['customer_return' => true]));
+            // event(new CustomerStatusEvent($lead->customer_id, $this->getCar(), ['customer_return' => true]));
+        }
+            
 
     }
 
