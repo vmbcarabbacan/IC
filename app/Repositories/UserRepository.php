@@ -24,8 +24,8 @@ class UserRepository extends GlobalService implements UserInterface {
 
             $exist = $this->checkUserByEmail($data['email']);
 
-            // if($exist)
-            //     return false;
+            if($exist)
+                return false;
 
             $setting = $data['setting'];
             unset($data['setting']);
