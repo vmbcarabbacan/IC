@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\DB;
 class AppConfigurationSeeder extends Seeder
 {
     protected $configurations = [
-        [ 'key' => 'api_url', 'value' => 'localhost:8080', 'description' => 'URI of the application' ],
+        [ 'key' => 'api_url', 'value' => 'http://personal.me', 'description' => 'URI of the application' ],
         [ 'key' => 'login_attempts', 'value' => '5', 'description' => 'User failed attempts' ],
         [ 'key' => 'last_car_agent_assigned', 'value' => '0', 'description' => 'Agent id last assigned in roundrobin for car' ],
         [ 'key' => 'last_health_agent_assigned', 'value' => '0', 'description' => 'Agent id last assigned in roundrobin for health' ],
         [ 'key' => 'last_travel_agent_assigned', 'value' => '0', 'description' => 'Agent id last assigned in roundrobin for travel' ],
         [ 'key' => 'last_home_agent_assigned', 'value' => '0', 'description' => 'Agent id last assigned in roundrobin for home' ],
+        [ 'key' => 'token_check', 'value' => '5', 'description' => 'Token check before expire in minute' ],
+        [ 'key' => 'token_expiry', 'value' => '15', 'description' => 'Token expires in minute' ],
+        [ 'key' => 'token_refresh', 'value' => '30', 'description' => 'Token refresh in minute' ],
     ];
 
     /**

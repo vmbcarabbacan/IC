@@ -15,7 +15,7 @@ class GlobalService {
     }
 
     public function getClient() {
-        return DB::table('oauth_clients')->latest()->first();
+        return DB::table('oauth_clients')->latest('id')->first();
     }
 
     public function model($model, $condition, $with = null) {
@@ -36,6 +36,13 @@ class GlobalService {
 
     public function systemDate() {
         return Carbon::now();
+    }
+
+    public function systemTimestamp($value = null) {
+        if($value) 
+            return Carbon::now()->addMinutes($value)->timestamp;
+
+        return Carbon::now()->timestamp;
     }
 
     public function systemNow() { 

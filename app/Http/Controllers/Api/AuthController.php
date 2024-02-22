@@ -9,7 +9,7 @@ use App\Traits\LoggingTrait;
 use App\Traits\ResponseTrait;
 use App\Interfaces\UserInterface;
 use App\Services\GlobalService;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -48,33 +48,23 @@ class AuthController extends Controller
         $exist = $this->userInterface->getUser([ 'email' => $data['email'] ]);
 
         if(!$exist)
-            return $this->resUnauthenticated('Email do not exist!', []);
+            return $this->resUnauthenticated('Email do not exist!');
 
-        if(!password_verify($data['password'], $exist->password));
-            return $this->resUnauthenticated('Invalid credentials', []);
+        if(!password_verify($data['password'], $exist->password))
+            return $this->resUnauthenticated('Invalid credentials');
 
         if($exist->status == 0)
-            return $this->resUnauthenticated('User is inactive', []);
+            return $this->resUnauthenticated('User is inactive');
 
-        return $this->resSuccess('Login successful', $this->oauth($data['email'], $data['password']));
+        return $this->resSuccess('Login successfully', $this->userInterface->oauth($data['email'], $data['password'], $exist->toArray()));
     }
 
-    protected function oauth($email, $password) {
-        $url = $this->global->getSetting('api_url')->value;
-        $client_id = $this->global->getClient()->id;
-        $client_secret = $this->global->getClient()->secret;
+    public function logout($user_id) {
+        if($this->userInterface->logoutUser($user_id))
+            return $this->resSuccess('Logout successfully');
 
-        $url = "$url/oauth/token";
-        $response = Http::withoutVerifying()->asForm()->post($url, [
-            'grant_type' => 'password',
-            'client_id' => $client_id,
-            'client_secret' => $client_secret,
-            'username' => $email,
-            'password' => $password,
-            'scope' => 'api'
-        ]);
-
-        return $response->json();
+        return $this->resInvalid('Logout unsuccessfully');
     }
+
 
 }

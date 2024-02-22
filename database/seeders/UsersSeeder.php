@@ -12,7 +12,7 @@ class UsersSeeder extends Seeder
 {
     protected $users = [
         [
-            "id" =>  1,
+            "id" =>  100,
             "name" =>  "vincent admin",
             "email" =>  "vmbcarabbacan@gmail.com",
             "password" =>  "M0a3r1k5",
