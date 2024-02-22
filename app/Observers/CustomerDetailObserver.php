@@ -6,6 +6,8 @@ use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 use App\Models\CustomerDetails;
 use App\Traits\SystemTrait;
 use App\Events\CustomerLogEvent;
+use App\Events\RoundrobinSalesAgentEvent;
+use Illuminate\Support\Facades\Log;
 
 class CustomerDetailObserver implements ShouldHandleEventsAfterCommit
 {
@@ -24,8 +26,11 @@ class CustomerDetailObserver implements ShouldHandleEventsAfterCommit
             event(new CustomerLogEvent('update-customer-status', $customerDetails->customer_id, $data));
         }
 
-        if($customerDetails->agent_id == 0)
-            // function for roundrobin
+        Log::info('created customer detail');
+        if($customerDetails->agent_id == 0) {
+            Log::info('inside agent id o');
+            event(new RoundrobinSalesAgentEvent($customerDetails->customer_id));
+        }
 
         $customerDetails->saveQuietly();
     }

@@ -25,12 +25,15 @@ class CustomerLogListener extends GlobalService
                 $number = 2; break;
             case 'update-customer-status':
                 $number = 3; break;
+            case 'agent-assigned';
+                $number = 4; break;
 
             default: $number = 1; break;
         }
 
         $data['title'] = config('constants.customer_log')[$number];
-        $data['by'] = $this->currentUser();
+        $data['id'] = $this->currentUser();
+        $data['by'] = $this->currentUserName();
         $data['date'] = $this->systemNow();
 
         $log = new CustomerLog();

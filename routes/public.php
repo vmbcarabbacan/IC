@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Application\UserController;
+use App\Http\Controllers\Api\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +16,7 @@ use App\Http\Controllers\Application\UserController;
 |
 */
 
-// Route::group(['middleware' => ['token_check']], function() {
-    Route::group(['prefix' => 'user'], function() {
-        Route::post('/save', [UserController::class, 'saveUser']);
-        Route::post('/update', [UserController::class, 'updateUser']);
-    });
-// });
+Route::group(['prefix' => 'api'], function() {
+    
+    Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
+});

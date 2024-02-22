@@ -11,6 +11,8 @@ use App\Events\CustomerLogEvent;
 use App\Listeners\CustomerLogListener;
 use App\Events\CarLeadStatusEvent;
 use App\Listeners\CarLeadStatusListener;
+use App\Events\RoundrobinSalesAgentEvent;
+use App\Listeners\RoundrobinSalesAgentListener;
 
 // use App\Models\CarLeadTask;
 // use App\Observers\CarLeadTaskObserver;
@@ -31,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CarLeadStatusEvent::class => [
             CarLeadStatusListener::class
+        ],
+        RoundrobinSalesAgentEvent::class => [
+            RoundrobinSalesAgentListener::class
         ],
     ];
 

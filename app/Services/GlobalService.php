@@ -30,6 +30,10 @@ class GlobalService {
         return auth()->user() ? auth()->user()->id : $this->system();
     }
 
+    public function currentUserName() {
+        return auth()->user() ? auth()->user()->name : 'System';
+    }
+
     public function systemDate() {
         return Carbon::now();
     }

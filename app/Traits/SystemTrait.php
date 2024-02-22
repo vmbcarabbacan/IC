@@ -225,4 +225,45 @@ trait SystemTrait {
     public function getCar() {
         return 1;
     }
+
+    // user status
+    public function getAdminRole() {
+        return 1;
+    }
+    
+    public function getSalesAgentRole() {
+        return 2;
+    }
+
+    public function getUnderwriterRole() {
+        return 3;
+    }
+
+    public function getAccountantRole() {
+        return 4;
+    }
+
+    public function getMarketingAgentRole() {
+        return 5;
+    }
+    
+    public function getSalesManagerRole() {
+        return 6;
+    }
+
+    public function getMarketingAdminRole() {
+        return 7;
+    }
+
+    public function getTeamLeaderRole() {
+        return 8;
+    }
+
+    public function getQualityComplianceAssuranceRole() {
+        return 9;
+    }
+
+    public function getAgentRoundrobinRoles() {
+        return [2, 6, 8];
+    }
 }

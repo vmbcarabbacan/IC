@@ -21,7 +21,8 @@ return [
     'customer_log' => [
         1 => 'Created Customer',
         2 => 'Updated Customer Information',
-        3 => 'Update Customer Status'
+        3 => 'Update Customer Status',
+        4 => 'Agent assigned'
     ],
 
     'customer_status' => [
