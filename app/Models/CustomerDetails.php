@@ -22,4 +22,8 @@ class CustomerDetails extends Model
         'utm_medium',
         'utm_term'
     ];
+
+    public function tasks() {
+        return $this->hasMany(CarLeadTask::class, 'customer_id', 'customer_id');
+    }
 }

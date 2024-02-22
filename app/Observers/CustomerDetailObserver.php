@@ -26,9 +26,7 @@ class CustomerDetailObserver implements ShouldHandleEventsAfterCommit
             event(new CustomerLogEvent('update-customer-status', $customerDetails->customer_id, $data));
         }
 
-        Log::info('created customer detail');
         if($customerDetails->agent_id == 0) {
-            Log::info('inside agent id o');
             event(new RoundrobinSalesAgentEvent($customerDetails->customer_id));
         }
 

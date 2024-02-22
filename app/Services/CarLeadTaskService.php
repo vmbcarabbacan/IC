@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\CarLeadTask;
+use App\Models\CustomerDetails;
 use App\Services\GlobalService;
 use Illuminate\Support\Facades\DB;
 
@@ -36,6 +37,33 @@ class CarLeadTaskService extends GlobalService {
             DB::rollBack();
             return $e;
         }
+    }
+
+    public function assignUnsignedAgent() {
+        $tasks = CarLeadTask::where('agent_id', 0)->get();
+
+        foreach($tasks as $task) {
+            $customer = CustomerDetails::where([
+                'customer_id' => $task->customer_id,
+                'insurance_type' => $this->getCar()
+            ])->first();
+
+            $task->agent_id = $customer->agent_id;
+            $task->save();
+        }
+    }
+    
+    public function getCount($customer_id) {
+        return CarLeadTask::where(['customer_id' => $customer_id])->whereNull('closed_at')->count();
+    }
+
+    public function isRenewal($customer_id) {
+        return CarLeadTask::where(['customer_id' => $customer_id, 'is_renewal' => 1])->whereNull('closed_at')->exists();
+    }
+
+    public function getOldestDueDate($customer_id) {
+        return CarLeadTask::where(['customer_id' => $customer_id])->whereNull('closed_at')->orderBy('due_date', 'ASC')->first()->due_date;
+
     }
 
 }

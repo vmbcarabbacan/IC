@@ -7,6 +7,7 @@ use App\Models\CarDriverDetail;
 use App\Models\Customer;
 use App\Models\CustomerDetails;
 use App\Services\CarLeadService;
+use Illuminate\Support\Str;
 
 class CustomerRepository extends CarLeadService implements CustomerInterface {
 
@@ -18,6 +19,9 @@ class CustomerRepository extends CarLeadService implements CustomerInterface {
     public function createOrUpdate(array $data)
     {
         $customer = new Customer();
+
+        if(!isset($data['session_id']))
+            $data['session_id'] = Str::random(15);
 
         $exist = $this->getCustomer(['country_code' => $data['country_code'], 'phone_number' => $data['phone_number'] ]);
         if($exist) $data['id'] = $exist->id;

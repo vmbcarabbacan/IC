@@ -5,10 +5,10 @@ namespace App\Observers;
 use App\Models\CarLead;
 use App\Models\CarLeadTask;
 use App\Models\CustomerDetails;
-use App\Services\GlobalService;
+use App\Services\CarLeadTaskService;
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
-class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAfterCommit
+class CarLeadTaskObserver extends CarLeadTaskService implements ShouldHandleEventsAfterCommit
 {
     /**
      * Handle the CarLeadTask "created" event.
@@ -19,7 +19,6 @@ class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAft
         $lead = $this->model(CarLead::class, ['id' => $carLeadTask->car_lead_id]);
 
         $carLeadTask->created_by = $this->currentUser();
-        $carLeadTask->agent_id = $customerDetails->agent_id;
         $carLeadTask->agent_id = $customerDetails->agent_id;
         $carLeadTask->customer_status_id = $customerDetails->status;
         $carLeadTask->lead_status_id = $lead->status;
@@ -75,16 +74,4 @@ class CarLeadTaskObserver extends GlobalService implements ShouldHandleEventsAft
         //
     }
 
-    private function getCount($customer_id) {
-        return CarLeadTask::where(['customer_id' => $customer_id])->whereNull('closed_at')->count();
-    }
-
-    private function isRenewal($customer_id) {
-        return CarLeadTask::where(['customer_id' => $customer_id, 'is_renewal' => 1])->whereNull('closed_at')->exists();
-    }
-
-    private function getOldestDueDate($customer_id) {
-        return CarLeadTask::where(['customer_id' => $customer_id])->whereNull('closed_at')->orderBy('due_date', 'ASC')->first()->due_date;
-
-    }
 }
