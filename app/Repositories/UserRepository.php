@@ -199,7 +199,7 @@ class UserRepository extends GlobalService implements UserInterface {
             $tokenRepository->revokeAccessToken($access_token->id);
             $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($access_token->id);
 
-            dispatch(new RefreshTokenEvent($user_id, [], false));
+            broadcast(new RefreshTokenEvent($user_id, [], false));
 
             return true;
         } catch (\Exception $e) {
@@ -209,7 +209,7 @@ class UserRepository extends GlobalService implements UserInterface {
                 "data" => $e
             ]);
 
-            dispatch(new RefreshTokenEvent($user_id, [], false));
+            broadcast(new RefreshTokenEvent($user_id, [], false));
             return false;
         }
 
