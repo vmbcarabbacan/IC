@@ -12,10 +12,10 @@ class UsersSeeder extends Seeder
 {
     protected $users = [
         [
-            "id" =>  100,
-            "name" =>  "vincent admin",
-            "email" =>  "vmbcarabbacan@gmail.com",
-            "password" =>  "M0a3r1k5",
+            "id" =>  1,
+            "name" =>  "System",
+            "email" =>  "system@gmail.com",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  1,
                 "team_leader_id" =>  0,
@@ -24,7 +24,24 @@ class UsersSeeder extends Seeder
                 "is_round_robin" =>  0,
                 "agent_type" =>  0,
                 "renewal_deals" =>  0,
-                "insurance_type" =>  1,
+                "insurance_type" =>  0,
+                "status" =>  1
+            ]
+        ],
+        [
+            "id" =>  100,
+            "name" =>  "vincent admin",
+            "email" =>  "vmbcarabbacan@gmail.com",
+            "password" =>  "Password@123",
+            "setting" =>  [
+                "role_id" =>  1,
+                "team_leader_id" =>  0,
+                "underwriter_id" =>  0,
+                "is_underwriter" =>  0,
+                "is_round_robin" =>  0,
+                "agent_type" =>  0,
+                "renewal_deals" =>  0,
+                "insurance_type" =>  0,
                 "status" =>  1
             ]
         ],
@@ -32,7 +49,7 @@ class UsersSeeder extends Seeder
             "id" =>  2,
             "name" =>  "Martin underwriter",
             "email" =>  "martin@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  3,
                 "team_leader_id" =>  0,
@@ -49,7 +66,7 @@ class UsersSeeder extends Seeder
             "id" =>  3,
             "name" =>  "Joseph leader",
             "email" =>  "joseph@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  8,
                 "team_leader_id" =>  0,
@@ -66,7 +83,7 @@ class UsersSeeder extends Seeder
             "id" =>  4,
             "name" =>  "Mikael",
             "email" =>  "mikael@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  2,
                 "team_leader_id" =>  3,
@@ -83,7 +100,7 @@ class UsersSeeder extends Seeder
             "id" =>  5,
             "name" =>  "Ronny",
             "email" =>  "ronny@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  2,
                 "team_leader_id" =>  3,
@@ -100,7 +117,7 @@ class UsersSeeder extends Seeder
             "id" =>  6,
             "name" =>  "leah",
             "email" =>  "leah@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  8,
                 "team_leader_id" =>  0,
@@ -117,7 +134,7 @@ class UsersSeeder extends Seeder
             "id" =>  7,
             "name" =>  "Tony",
             "email" =>  "tony@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  2,
                 "team_leader_id" =>  6,
@@ -134,7 +151,7 @@ class UsersSeeder extends Seeder
             "id" =>  8,
             "name" =>  "Tim",
             "email" =>  "tim@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  2,
                 "team_leader_id" =>  6,
@@ -151,7 +168,7 @@ class UsersSeeder extends Seeder
             "id" =>  9,
             "name" =>  "Zack",
             "email" =>  "zack@yopmail.com",
-            "password" =>  "M0a3r1k5",
+            "password" =>  "Password@123",
             "setting" =>  [
                 "role_id" =>  6,
                 "team_leader_id" =>  0,

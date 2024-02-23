@@ -1,0 +1,651 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger with Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/private/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Authenticate user and generate personal access token",
+                "operationId": "a60e630a5ca5c73f9c0a860da7a5399b",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "vincent@test.com",
+                                    "password": "M0a3r1k5"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "Bearer"
+                                                },
+                                                "expires_in": {
+                                                    "type": "number",
+                                                    "example": "900"
+                                                },
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"
+                                                },
+                                                "refresh_token": {
+                                                    "type": "string",
+                                                    "example": "def50200af22d480ac24fea3e0bdc8747f4"
+                                                },
+                                                "active_time": {
+                                                    "type": "string",
+                                                    "example": 1708683263
+                                                },
+                                                "token_expires": {
+                                                    "type": "string",
+                                                    "example": 1708683278
+                                                },
+                                                "refresh_expires": {
+                                                    "type": "string",
+                                                    "example": 1708683293
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "number",
+                                                            "example": 100
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "vincent mark"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "vmbcarabbacan@gmail.com"
+                                                        },
+                                                        "email_verified_at": {
+                                                            "type": "string",
+                                                            "example": null
+                                                        },
+                                                        "status": {
+                                                            "type": "number",
+                                                            "example": 1
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "2024-02-22T17:29:46.000000Z"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "example": "2024-02-22T17:29:46.000000Z"
+                                                        },
+                                                        "status_text": {
+                                                            "type": "string",
+                                                            "example": "Active"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/private/user/logout/{user_id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Logout the user",
+                "operationId": "adeeae4fd1aac65f3b866a2aa876b7e9",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {},
+                                            "maxItems": 0
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized access"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token_checker": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/public/api/add-customer": {
+            "post": {
+                "tags": [
+                    "Public Customers"
+                ],
+                "summary": "Add new Customer with a Quick Lead",
+                "operationId": "238b2b3b3b6e20a76c363681f910bde1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "": {
+                                        "$ref": "#/components/schemas/CustomerQLSchema"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Vincent Mark",
+                                    "email": "vmbcarabbacan@gmail.com",
+                                    "country_code": "+971",
+                                    "phone_number": "566368779",
+                                    "other_contact_info": null,
+                                    "insurance_type": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer added/updated successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Vincent Mark"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "vmbcarabbacan@gmail.com"
+                                                },
+                                                "country_code": {
+                                                    "type": "string",
+                                                    "example": "+971"
+                                                },
+                                                "phone_number": {
+                                                    "type": "string",
+                                                    "example": "566368779"
+                                                },
+                                                "other_contact_info": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 18
+                                                },
+                                                "created_by": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "complete_phone_number": {
+                                                    "type": "string",
+                                                    "example": "971566368779"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {},
+                                            "maxItems": 0
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/private/user/save": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Add new user",
+                "operationId": "3612b5fb539111690d361b515bd480b6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "$ref": "#/components/schemas/UserSchema"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Vincent",
+                                    "email": "vincent@test.com",
+                                    "password": "Password@123",
+                                    "setting": {
+                                        "role_id": 1,
+                                        "team_leader_id": 0,
+                                        "underwriter_id": 0,
+                                        "is_underwriter": 0,
+                                        "is_round_robin": 0,
+                                        "agent_type": 0,
+                                        "renewal_deals": 0,
+                                        "insurance_type": 1,
+                                        "status": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User save successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Vincent"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "vincent@test.com"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 101
+                                                },
+                                                "status_text": {
+                                                    "type": "string",
+                                                    "example": "Active"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/private/user/update": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user by id",
+                "operationId": "99f8ca461f67e9241cf201aeae9eb293",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "": {
+                                        "$ref": "#/components/schemas/UserSchema"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "id": 100,
+                                    "name": "Vincent",
+                                    "email": "vincent@test.com",
+                                    "password": "Password@123",
+                                    "setting": {
+                                        "role_id": 1,
+                                        "team_leader_id": 0,
+                                        "underwriter_id": 0,
+                                        "is_underwriter": 0,
+                                        "is_round_robin": 0,
+                                        "agent_type": 0,
+                                        "renewal_deals": 0,
+                                        "insurance_type": 1,
+                                        "status": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User save successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Vincent"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "vincent@test.com"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-02-23T16:39:54.000000Z"
+                                                },
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 101
+                                                },
+                                                "status_text": {
+                                                    "type": "string",
+                                                    "example": "Active"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Something went wrong"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {},
+                                            "maxItems": 0
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "meta": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CustomerQLSchema": {
+                "properties": {
+                    "": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "country_code": {
+                                "type": "string"
+                            },
+                            "phone_number": {
+                                "type": "string"
+                            },
+                            "other_contact_info": {
+                                "type": "string"
+                            },
+                            "insurance_type": {
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UserSchema": {
+                "properties": {
+                    "": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            },
+                            "setting": {
+                                "properties": {
+                                    "role_id": {
+                                        "type": "number"
+                                    },
+                                    "team_leader_id": {
+                                        "type": "number"
+                                    },
+                                    "underwriter_id": {
+                                        "type": "number"
+                                    },
+                                    "is_underwriter": {
+                                        "type": "number"
+                                    },
+                                    "is_round_robin": {
+                                        "type": "number"
+                                    },
+                                    "agent_type": {
+                                        "type": "number"
+                                    },
+                                    "renewal_deals": {
+                                        "type": "number"
+                                    },
+                                    "insurance_type": {
+                                        "type": "number"
+                                    },
+                                    "status": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

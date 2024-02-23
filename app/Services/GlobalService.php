@@ -14,6 +14,12 @@ class GlobalService {
         return DB::table('app_configurations')->where('key', $key)->first();
     }
 
+    public function updateConfiguration($key, $value) {
+        DB::table('app_configurations')->where('key', $key)->update([
+            'value' => $value
+        ]);
+    }
+
     public function getClient() {
         return DB::table('oauth_clients')->latest('id')->first();
     }

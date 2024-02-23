@@ -32,7 +32,7 @@ class UserRepository extends GlobalService implements UserInterface {
             $exist = $this->checkUserByEmail($data['email']);
 
             if($exist)
-                return false;
+                return $exist;
 
             $setting = $data['setting'];
             unset($data['setting']);

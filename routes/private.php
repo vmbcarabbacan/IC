@@ -18,11 +18,14 @@ use App\Http\Controllers\Application\UserController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['token_check', 'auth:api']], function() {
+Route::group(['middleware' => ['token_check']], function() {
     Route::group(['prefix' => 'user'], function() {
+        
         Route::get('/logout/{user_id}', [AuthController::class, 'logout']);
 
-        Route::post('/save', [UserController::class, 'saveUser']);
-        Route::post('/update', [UserController::class, 'updateUser']);
+        Route::group(['middleware' => ['auth:api']], function() {
+            Route::post('/save', [UserController::class, 'saveUser']);
+            Route::post('/update', [UserController::class, 'updateUser']);
+        });
     });
 });

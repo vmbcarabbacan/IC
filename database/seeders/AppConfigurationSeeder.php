@@ -18,6 +18,7 @@ class AppConfigurationSeeder extends Seeder
         [ 'key' => 'token_check', 'value' => '5', 'description' => 'Token check before expire in minute' ],
         [ 'key' => 'token_expiry', 'value' => '15', 'description' => 'Token expires in minute' ],
         [ 'key' => 'token_refresh', 'value' => '30', 'description' => 'Token refresh in minute' ],
+        [ 'key' => 'last_id_refresh', 'value' => '0', 'description' => 'Last id refresh from middleware' ],
     ];
 
     /**

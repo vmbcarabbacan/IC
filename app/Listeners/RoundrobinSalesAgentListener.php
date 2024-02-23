@@ -102,12 +102,6 @@ class RoundrobinSalesAgentListener extends GlobalService implements ShouldQueue
         }
     }
 
-    private function updateConfiguration($key, $value) {
-        DB::table('app_configurations')->where('key', $key)->update([
-            'value' => $value
-        ]);
-    }
-
     private function updateAgentTask($customer_id, $agent_id) {
         CarLeadTask::where([
             'customer_id' => $customer_id,
