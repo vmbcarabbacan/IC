@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Public\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\Api\CustomerController;
 */
 
 Route::group(['prefix' => 'api'], function() {
+    Route::get('/device', [WebsiteController::class, 'createDevice']);
     
     Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
 });

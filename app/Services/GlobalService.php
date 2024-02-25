@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\SystemTrait;
 use App\Traits\LoggingTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class GlobalService {
 
@@ -62,6 +63,10 @@ class GlobalService {
     public function countryCodeCheck($value) {
         if(str_starts_with($value, '+')) return $value;
         else return "+$value";
+    }
+
+    public function randomString($value = 15) {
+        return Str::random($value);
     }
 
 }

@@ -21,7 +21,7 @@ class CustomerRepository extends CarLeadService implements CustomerInterface {
         $customer = new Customer();
 
         if(!isset($data['session_id']))
-            $data['session_id'] = Str::random(15);
+            $data['session_id'] = $this->randomString();
 
         $exist = $this->getCustomer(['country_code' => $data['country_code'], 'phone_number' => $data['phone_number'] ]);
         if($exist) $data['id'] = $exist->id;

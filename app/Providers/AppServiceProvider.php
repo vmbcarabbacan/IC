@@ -7,10 +7,12 @@ use Illuminate\Support\ServiceProvider;
 // repositories
 use App\Repositories\UserRepository;
 use App\Repositories\CustomerRepository;
+use App\Repositories\WebsiteRepository;
 
 // interfaces
 use App\Interfaces\UserInterface;
 use App\Interfaces\CustomerInterface;
+use App\Interfaces\WebsiteInterface;
 
 // Observer
 use App\Models\Customer;
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserInterface::class, UserRepository::class);
         $this->app->bind(CustomerInterface::class, CustomerRepository::class);
+        $this->app->bind(WebsiteInterface::class, WebsiteRepository::class);
     }
 
     /**

@@ -557,6 +557,132 @@
                     }
                 ]
             }
+        },
+        "/public/api/device": {
+            "get": {
+                "tags": [
+                    "Public Website"
+                ],
+                "summary": "Create new device id and generate new token",
+                "operationId": "976646375acf555e813a15dcf25a7282",
+                "parameters": [
+                    {
+                        "name": "country_product_id",
+                        "in": "query",
+                        "description": "country where it is located, default 1",
+                        "required": true
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "query",
+                        "description": "device type, default 1",
+                        "required": true
+                    },
+                    {
+                        "name": "source_id",
+                        "in": "query",
+                        "description": "source type, default 1",
+                        "required": true
+                    },
+                    {
+                        "name": "utm_campaign",
+                        "in": "query",
+                        "description": "default organic",
+                        "required": false
+                    },
+                    {
+                        "name": "device_uuid",
+                        "in": "query",
+                        "description": "id that will be use to map from frontend",
+                        "required": false
+                    },
+                    {
+                        "name": "utm_medium",
+                        "in": "query",
+                        "description": "default organic",
+                        "required": false
+                    },
+                    {
+                        "name": "utm_source",
+                        "in": "query",
+                        "description": "default organic",
+                        "required": false
+                    },
+                    {
+                        "name": "utm_term",
+                        "in": "query",
+                        "description": "default organic",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Device id created"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "stnumberring",
+                                                    "example": 1
+                                                },
+                                                "country_product_id": {
+                                                    "type": "stnumberring",
+                                                    "example": 1
+                                                },
+                                                "device_type": {
+                                                    "type": "stnumberring",
+                                                    "example": 1
+                                                },
+                                                "source_id": {
+                                                    "type": "stnumberring",
+                                                    "example": 1
+                                                },
+                                                "utm_campaign": {
+                                                    "type": "string",
+                                                    "example": "organic"
+                                                },
+                                                "utm_medium": {
+                                                    "type": "string",
+                                                    "example": "organic"
+                                                },
+                                                "utm_source": {
+                                                    "type": "string",
+                                                    "example": "organic"
+                                                },
+                                                "utm_term": {
+                                                    "type": "string",
+                                                    "example": "organic"
+                                                },
+                                                "device_uuid": {
+                                                    "type": "string",
+                                                    "example": "pH4oCGmb-j2uwr-0GMsC-15RNu-HNzta942mA2w"
+                                                },
+                                                "token_expires": {
+                                                    "type": "string",
+                                                    "example": 1708683278
+                                                },
+                                                "refresh_expires": {
+                                                    "type": "string",
+                                                    "example": 1708683293
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
