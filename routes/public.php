@@ -20,5 +20,8 @@ use App\Http\Controllers\Public\WebsiteController;
 Route::group(['prefix' => 'api'], function() {
     Route::get('/device', [WebsiteController::class, 'createDevice']);
     
-    Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
+    Route::group(['middleware' => ['auth:api']], function() {
+        Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
+
+    });
 });

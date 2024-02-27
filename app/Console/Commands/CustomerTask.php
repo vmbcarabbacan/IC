@@ -40,12 +40,21 @@ class CustomerTask extends Command
         })
         ->whereNull('task_due_date')->get();
 
+        $bar = $this->output->createProgressBar(count($customer_details));
+        $bar->start();
+        $this->newLine();
+        $this->info("Customer Tasks Starting");
+
         foreach($customer_details as $customer) {
             $customer->task_count = $this->carLeadTaskService->getCount($customer->customer_id);
             $customer->task_due_date = $this->carLeadTaskService->getOldestDueDate($customer->customer_id);
 
             $customer->save();
+            $bar->advance();
         }
+        $bar->finish();
+        $this->newLine();
+        $this->info("Customer Tasks Completed");
 
         $this->carLeadTaskService->assignUnsignedAgent();
     }

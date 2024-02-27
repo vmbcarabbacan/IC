@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Application\MasterController;
 use App\Http\Controllers\Application\UserController;
 
 /*
@@ -26,6 +27,12 @@ Route::group(['middleware' => ['token_check']], function() {
         Route::group(['middleware' => ['auth:api']], function() {
             Route::post('/save', [UserController::class, 'saveUser']);
             Route::post('/update', [UserController::class, 'updateUser']);
+        });
+    });
+
+    Route::group(['middleware' => ['auth:api']], function() {
+        Route::group(['prefix' => 'configuration'], function() {
+            Route::group('/add-make', [MasterController::class, 'addMake']);
         });
     });
 });
