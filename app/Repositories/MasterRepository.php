@@ -21,6 +21,8 @@ class MasterRepository implements MasterInterface {
         
         $make->fill($data);
         $make->save();
+
+        return $make;
     }
 
     public function addOrUpdateModel(array $data)
@@ -35,6 +37,8 @@ class MasterRepository implements MasterInterface {
         
         $model->fill($data);
         $model->save();
+
+        return $model;
     }
 
     public function addOrUpdateYear(array $data)
@@ -49,5 +53,7 @@ class MasterRepository implements MasterInterface {
         
         $year->fill($data);
         $year->save();
+
+        return $year;
     }
 }

@@ -13,7 +13,9 @@ class CarMake extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'name'
+        'name',
+        'is_common',
+        'make_country'
     ];
 
 }

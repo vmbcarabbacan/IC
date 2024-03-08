@@ -22,6 +22,7 @@ Route::group(['prefix' => 'api'], function() {
     
     Route::group(['middleware' => ['auth:api']], function() {
         Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
+        // Route::get('/car-details', [])
 
     });
 });

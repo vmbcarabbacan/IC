@@ -30,9 +30,10 @@ Route::group(['middleware' => ['token_check']], function() {
         });
     });
 
-    Route::group(['middleware' => ['auth:api']], function() {
-        Route::group(['prefix' => 'configuration'], function() {
-            Route::group('/add-make', [MasterController::class, 'addMake']);
-        });
+    Route::group(['prefix' => 'configuration','middleware' => ['auth:api']], function() {
+        Route::post('/add-make', [MasterController::class, 'addMake']);
+        Route::post('/add-model', [MasterController::class, 'addModel']);
+        Route::post('/add-year', [MasterController::class, 'addYear']);
+        Route::get('/get-{type}', [MasterController::class, 'getMaster']);
     });
 });
