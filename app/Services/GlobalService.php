@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\SystemTrait;
 use App\Traits\LoggingTrait;
 use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 class GlobalService {
@@ -67,6 +69,21 @@ class GlobalService {
 
     public function randomString($value = 15) {
         return Str::random($value);
+    }
+
+    public function encrypt($value) {
+        return Crypt::encryptString($value);
+    }
+
+    public function decrypt($value) {
+        try {
+            return Crypt::decryptString($value);
+        } catch(DecryptException $e) {
+            $this->logError([
+                "function" => "addCustomer",
+                "data" => $e
+            ]);
+        }
     }
 
 }

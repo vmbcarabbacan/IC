@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Application\MasterController;
 use App\Http\Controllers\Public\WebsiteController;
 
 /*
@@ -20,9 +21,9 @@ use App\Http\Controllers\Public\WebsiteController;
 Route::group(['prefix' => 'api'], function() {
     Route::get('/device', [WebsiteController::class, 'createDevice']);
     
-    Route::group(['middleware' => ['auth:api']], function() {
+    // Route::group(['middleware' => ['auth:api']], function() {
         Route::post('/add-customer', [CustomerController::class, 'addCustomer']);
-        // Route::get('/car-details', [])
+        Route::post('/car-details', [MasterController::class, 'getCarDetails']);
 
-    });
+    // });
 });

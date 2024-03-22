@@ -149,22 +149,35 @@ class MasterController extends Controller
         $data = $request->all();
 
         $conditions = array();
+        $unique = 'label';
         
         if(isset($data['car_make_id'])) $conditions['car_make_id'] = $data['car_make_id'];
         if(isset($data['car_year'])) $conditions['car_year'] = $data['car_year'];
         if(isset($data['car_model_id'])) $conditions['car_model_id'] = $data['car_model_id'];
 
-        if(isset($data['full_details']))
+        if(isset($data['full_details']) && $data['full_details'] == true) 
             $trims = CarTrim::where($conditions)->get();
+        else 
+            $trims = $this->getValues(CarTrim::class, $conditions);
 
-        $trims = $this->getValues(CarTrim::class, $conditions);
+        $trims = collect($trims);
 
-        if(isset($data['single']))
-            $trims = collect($trims)->unique('id');
+        if(isset($data['single']) && $data['single'] == true)
+            $trims = $trims->unique($unique);
 
-        return $trims->reject(function ($value) {
-            return $value['name'] !== '' || $value['label'] !== '';
-        });
+        $trims = $trims->filter(function($q) {
+                if($q->label || $q->name)
+                    return $q;
+            });
+
+        if(isset($data['take']))
+            $trims = $trims->take($data['take']);
+
+        $trim = array();
+        foreach($trims as $key => $value)
+            $trim[] = $value;
+
+        return $trim;
     }
 
     private function getValues($model, $conditions = null) {
